@@ -1,0 +1,38 @@
+#ifndef CH13_30_HEADER
+#define CH13_30_HEADER
+
+#include <string>
+#include <iostream>
+
+class HasPtr {
+public:
+    friend void swap(HasPtr&, HasPtr&);
+    
+    HasPtr(const std::string& s = std::string()) : 
+        ps(new std::string(s)), i(0){}
+    
+    HasPtr(const HasPtr& ptr) : ps(new std::string(*hp.ps)), i(hp.i) {}
+    
+    HasPtr& operator=(const HasPtr& ptr) {
+        auto new_p = new std::string(*ptr.ps);
+        delete ps;
+        ps = new_p;
+        i = ptr.i;
+        return *this;
+    }
+    ~HasPtr() {delete ps;}
+    
+private:
+    std::string* ps;
+    int i;
+};
+
+void swap(HasPtr& lhs, HasPtr& rhs) 
+{
+    using std::swap;
+    swap(lhs.ps, rhs.ps);
+    swap(lhs.i, rhs.i);
+}
+
+#endif // CH13_30_HEADER
+
