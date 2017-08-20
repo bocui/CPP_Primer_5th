@@ -1,3 +1,0 @@
-LINELINELINELINELine one;
-Line two;
-Line three;
